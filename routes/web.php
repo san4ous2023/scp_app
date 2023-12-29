@@ -15,11 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+//Route::get('/',  function () {
+//    return view('welcome');
+//})->middleware('first_enter');
+
+Auth::routes();
+Route::group(['prefix'=>'/','middleware'=>'first_enter'],function (){
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/header',Header::class)->name('header');
+
+});
+
+Route::get('/',  function () {
     return view('welcome');
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/header',Header::class);
