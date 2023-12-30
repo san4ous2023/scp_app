@@ -12,5 +12,8 @@ class Department extends Model
     public function users(){
         return $this->hasMany(User::class,'department_id','id');
     }
+    public function observations(){
+        return $this->hasMany(Observation::class,'department_id','id');
+    }
 
 }

@@ -22,12 +22,19 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::group(['prefix'=>'/','middleware'=>'first_enter'],function (){
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
     Route::get('/header',Header::class)->name('header');
 
 });
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/observation', \App\Http\Controllers\Observation\IndexController::class)->name('observation');
 Route::get('/',  function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Route::get('observations',\App\Http\Controllers\Observation\IndexController::class)->name('observation.index');
+Route::get('observations/create',\App\Http\Controllers\Observation\CreateController::class)->name('observation.create');
+Route::post('observations',\App\Http\Controllers\Observation\StoreController::class)->name('observation.store');
 
