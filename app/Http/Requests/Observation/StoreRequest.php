@@ -23,7 +23,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'site' => '',
-            'location' => '',
+            'location' => 'required',
             'further' => '',
             'corrective' => '',
             //'comments' => '',

@@ -8,6 +8,10 @@
                 <label for="location" class="form-label">Observation location</label>
                 <input type="text" name="location" class="form-control" id="location" value="{{old('location')}}"
                        placeholder="Observation location">
+
+                @error('location')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
             </div>
 
             <div class="mb-3">
@@ -15,6 +19,7 @@
                 <input type="text" name="department_id" hidden class="form-control" id="department_id" value="{{$user->department->id}}">
                 <input type="text" disabled class="form-control" id="departmentTitle" value="{{$user->department->title}}"
                        placeholder="user department">
+
             </div>
 
             <div class="mb-3">
