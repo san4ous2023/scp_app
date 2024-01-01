@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\hse\observations;
 
+use App\Models\Department;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

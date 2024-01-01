@@ -5,10 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>{{ $title ?? 'Page Title' }}</title>
-        @vite(['resources/sass/app.scss', 'resources/js/app-R9-0AGhc.js'])
+        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+        <liveiwre:Styles>
     </head>
     <body>
+    <div class="container">
 
-        {{ $slot }}
+        <main class="py-4">
+            @yield('content')
+        </main>
+
+    </div>
+    <liveiwre:scripts>
     </body>
 </html>

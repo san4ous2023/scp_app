@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Observation;
 
 use App\Http\Controllers\Controller;
-use App\Models\Observation;
+use App\Models\hse\observations\Observation;
 use App\Models\Status;
 
 class IndexController extends Controller

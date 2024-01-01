@@ -38,3 +38,7 @@ Route::get('observations',\App\Http\Controllers\Observation\IndexController::cla
 Route::get('observations/create',\App\Http\Controllers\Observation\CreateController::class)->name('observation.create');
 Route::post('observations',\App\Http\Controllers\Observation\StoreController::class)->name('observation.store');
 
+//LiveWire
+Route::get('observ/create',App\Livewire\Observation\Create::class)->name('observ.create');
+Route::get('observ/create1',App\Livewire\Observation\Create::class)->name('observ.create1');
+

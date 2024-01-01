@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Observation;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Observation\StoreRequest;
-use App\Models\Observation;
-use Illuminate\Http\Request;
+use App\Models\hse\observations\Observation;
 
 class StoreController extends Controller
 {
