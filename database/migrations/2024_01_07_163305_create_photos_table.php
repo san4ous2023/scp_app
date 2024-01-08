@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('unsafe_conditions', function (Blueprint $table) {
+        Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->string('title',64)->unique();
+            $table->string('url')->unique();
+            $table->string('observation_id')->nullable();
+            $table->string('intervention_id')->nullable();
+            $table->string('job_id')->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('unsafe_conditions');
+        Schema::dropIfExists('photos');
     }
 };

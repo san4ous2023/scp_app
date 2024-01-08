@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('unsafe_conditions', function (Blueprint $table) {
+        Schema::create('environmental_observation_observation', function (Blueprint $table) {
             $table->id();
-            $table->string('title',64)->unique();
+
+            $table->unsignedBigInteger('environmental_observation_id');
+            $table->unsignedBigInteger('observation_id');
+
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('unsafe_conditions');
+        Schema::dropIfExists('environmental_observation_observation');
     }
 };

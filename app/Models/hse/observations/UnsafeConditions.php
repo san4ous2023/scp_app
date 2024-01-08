@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class UnsafeConditions extends Model
 {
     use HasFactory;
+
+    public function observations(){
+        return $this->belongsToMany(Observation::class);
+    }
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('safety_states', function (Blueprint $table) {
             $table->id();
             $table->string('title',16)->unique();
-
+            $table->timestamps();
         });
     }
 

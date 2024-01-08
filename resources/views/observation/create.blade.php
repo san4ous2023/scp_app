@@ -45,7 +45,7 @@
             <div class="mb-3">
                 <label for="description" class="form-label">Job Description</label>
                 <textarea type="text" name="description" class="form-control" id="description"
-                          placeholder="Job Description">{{old('description')}}</textarea>
+                          placeholder="Job Description" wire:model="description">{{old('description')}}</textarea>
                 @error('description')
                 <p class="text-danger">{{$message}}</p>
                 @enderror
@@ -54,7 +54,7 @@
             <div class="mb-3">
                 <label for="further" class="form-label">Further Action Required</label>
                 <textarea type="text" name="further" class="form-control" id="further"
-                          placeholder="Description">{{old('further')}}</textarea>
+                          placeholder="Description" wire:model="further">{{old('further')}}</textarea>
                 @error('further')
                 <p class="text-danger">{{$message}}</p>
                 @enderror
@@ -63,7 +63,7 @@
             <div class="mb-3">
                 <label for="corrective" class="form-label">Corrective/Immediate Action Taken</label>
                 <textarea type="text" name="corrective" class="form-control" id="corrective"
-                          placeholder="Description">{{old('corrective')}}</textarea>
+                          placeholder="Description" wire:model="corrective">{{old('corrective')}}</textarea>
                 @error('corrective')
                 <p class="text-danger">{{$message}}</p>
                 @enderror

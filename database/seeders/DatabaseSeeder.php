@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Department;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,8 +17,51 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
+        User::factory(10)->create();
+
+
+
+        $roles = [
+            'guest',
+            'crew',
+            'hod',
+            'hse',
+            'admin',
+        ];
+
+        $bargeRoles = [];
+        for ($i = 0; $i < count($roles); $i++) {
+            $bargeRoles[$i] = ['title' => $roles[$i]];
+        }
+
+        $statuses = [
+            'new',
+            'in progress',
+            'postponed',
+            'canceled',
+            'closed',
+        ];
+
+        $bargeStatuses = [];
+        for ($i = 0; $i < count($statuses); $i++) {
+            $bargeStatuses[$i] = ['title' => $statuses[$i]];
+        }
+
+        $departments = [
+            'Vessel',
+            'Deck',
+            'Engine',
+            'Electrical',
+            'LayTech',
+            'Catering'
+        ];
+
+        $bargeDepartments = [];
+        for ($i = 0; $i < count($departments); $i++) {
+            $bargeDepartments[$i] = ['title' => $departments[$i]];
+        }
+
         $states = [
-            'NONE',
             'SAFE',
             'AT RISK'
         ];
@@ -44,12 +89,6 @@ class DatabaseSeeder extends Seeder
             'Conformance to rules/procedures/policies',
             'Immediate reporting of injury',
             'Correct PPE worn for the risk',
-        ];
-        $safetyBehaviours = [];
-        for ($i = 0; $i < count($behaviours); $i++) {
-            $safetyBehaviours[$i] = ['title' => $behaviours[$i]];
-        }
-        $ppes = [
             'Head protection',
             'Eye / Face protection',
             'Respiratory protection',
@@ -58,12 +97,12 @@ class DatabaseSeeder extends Seeder
             'Feet / ankle protection',
             'Hearing protection',
             'Working at Height PPE',
-
         ];
-        $correctPpes = [];
-        for ($i = 0; $i < count($ppes); $i++) {
-            $correctPpes[$i] = ['title' => $ppes[$i]];
+        $safetyBehaviours = [];
+        for ($i = 0; $i < count($behaviours); $i++) {
+            $safetyBehaviours[$i] = ['title' => $behaviours[$i]];
         }
+
 
         $unsafes = [
             'Warning system inadequate',
@@ -110,9 +149,12 @@ class DatabaseSeeder extends Seeder
         }
 
         // \App\Models\User::factory(10)->create();
+        DB::table('statuses')->insert($bargeStatuses);
+        DB::table('roles')->insert($bargeRoles);
+        DB::table('departments')->insert($bargeDepartments);
+
         DB::table('safety_states')->insert($safetyStates);
         DB::table('safety_behaviours')->insert($safetyBehaviours);
-        DB::table('correct_ppes')->insert($correctPpes);
 
         DB::table('unsafe_conditions')->insert($unsafeConditions);
         DB::table('quality_observations')->insert($qualityObservations);

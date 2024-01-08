@@ -22,22 +22,23 @@ return new class extends Migration {
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('job_id')->nullable();
             $table->unsignedInteger('department_id')->default(1);
+            $table->timestamps();
 
             $table->softDeletes();
 
-            $table->timestamps();
 
-            $table->index('department_id', 'observation_department_idx');
-            $table->foreign('department_id', 'observation_department_fk')->on('department')->references('id');
 
-            $table->index('user_id', 'observation_user_idx');
-            $table->foreign('user_id', 'observation_user_fk')->on('users')->references('id');
-
-//            $table->index('job_id', 'observation_job_idx');
-//            $table->foreign('job_id', 'observation_job_fk')->on('jobs')->references('id');
-
-            $table->index('status_id', 'observation_status_idx');
-            $table->foreign('status_id', 'observation_status_fk')->on('statuses')->references('id');
+//            $table->index('department_id', 'observation_department_idx');
+//            $table->foreign('department_id', 'observation_department_fk')->on('department')->references('id');
+//
+//            $table->index('user_id', 'observation_user_idx');
+//            $table->foreign('user_id', 'observation_user_fk')->on('users')->references('id');
+//
+////            $table->index('job_id', 'observation_job_idx');
+////            $table->foreign('job_id', 'observation_job_fk')->on('jobs')->references('id');
+//
+//            $table->index('status_id', 'observation_status_idx');
+//            $table->foreign('status_id', 'observation_status_fk')->on('statuses')->references('id');
 
         });
     }

@@ -14,7 +14,13 @@ return new class extends Migration
         Schema::create('safety_behaviours', function (Blueprint $table) {
             $table->id();
             $table->string('title',64)->unique();
-            $table->tinyInteger('safety_state_id',);
+            //$table->tinyInteger('safety_state_id',);
+            $table->timestamps();
+
+            //$table->softDeletes();
+
+            //$table->index('safety_state_id', 'safety_behaviours_safety_states_idx');
+            //$table->foreign('safety_state_id', 'safety_state_fk')->on('safety_states')->references('id');
         });
     }
 
