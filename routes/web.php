@@ -29,7 +29,7 @@ Route::group(['prefix'=>'/','middleware'=>'first_enter'],function (){
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//Route::get('/observation', \App\Http\Controllers\Observation\IndexController::class)->name('observation');
+//Route::get('/observation', \App\Http\Controllers\AdminObservation\IndexController::class)->name('observation');
 Route::get('/',  function () {
     return view('welcome');
 })->name('welcome');
@@ -41,4 +41,9 @@ Route::post('observations',\App\Http\Controllers\Observation\StoreController::cl
 //LiveWire
 Route::get('observ/create',App\Livewire\Observation\Create::class)->name('observ.create1');
 Route::post('observ/create',App\Livewire\Observation\Create::class)->name('observ.create1');
+
+Route::prefix('admin')->group(function () {
+    // Route::get('/', AdminController::class)->name('admin.index');
+    Route::get('/observation', App\Livewire\Admin\AdminObservation::class)->name('admin.observation.index');
+});
 

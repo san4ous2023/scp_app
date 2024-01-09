@@ -38,6 +38,9 @@
             {{$observations->withQueryString()->links()}}
         </div>
 
+{{--        <div>--}}
+{{--        @livewire('observation.create')--}}
+{{--        </div>--}}
 
 
 {{--                    <h3>{{$observation -> observation_name}}</h3>--}}

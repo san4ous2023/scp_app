@@ -103,10 +103,13 @@
                         <div class="row gx-3 p-2  align-items-center">
                             <div class="form-check col-1">
                                 <input class="form-check-input" type="checkbox"
+                                       wire:change="pressSafeCheckbox({{$behaviours->id}})"
                                        wire:model.live="safeCheckbox.{{$behaviours->id}}">
                             </div>
                             <div class="form-check col-1">
                                 <input class="form-check-input" type="checkbox"
+
+                                       wire:change="pressRiskCheckbox({{$behaviours->id}})"
                                        wire:model.live="riskCheckbox.{{$behaviours->id}}">
                             </div>
                             <div class="col text-wrap">{{$behaviours->title}}</div>

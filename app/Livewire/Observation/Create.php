@@ -68,6 +68,19 @@ class Create extends Component
         $this->user = auth()->user() ?? $this->guestUser;
     }
 
+    public function pressSafeCheckbox(int $id){
+        if ($this->safeCheckbox[$id]){
+            $this->riskCheckbox[$id] = false;
+        }
+
+    }
+    public function pressRiskCheckbox(int $id){
+        if ($this->riskCheckbox[$id]){
+             $this->safeCheckbox[$id] = false;
+        }
+
+    }
+
     public function mount()
     {
         $this->furtherSwitch = false;
@@ -86,7 +99,7 @@ class Create extends Component
         $this->environmentalObservations = EnvironmentalObservation::all();
 
         foreach ($this->safetyBehaviours as $behaviours){
-            $this->safeCheckbox = array_fill_keys($behaviours->pluck('id')->toArray(), false);
+            $this->safeCheckbox = array_fill_keys($behaviours->pluck('id')->toArray(), false );
             $this->riskCheckbox = array_fill_keys($behaviours->pluck('id')->toArray(), false);
         }
         foreach ($this->unsafeConditions as $unsafeCondition){
