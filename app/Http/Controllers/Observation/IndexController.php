@@ -12,8 +12,8 @@ class IndexController extends Controller
 {
     public function __invoke(){
 
-        $observation = Observation::find(1);
-        $unsafeConditions = UnsafeConditions::find(3);
+       // $observation = Observation::find(1);
+        $unsafeConditions = UnsafeConditions::all();
 
         //dd($unsafeConditions->observations);
        // dd($observation->unsafeConditions);

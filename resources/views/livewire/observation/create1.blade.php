@@ -53,7 +53,6 @@
                    value="{{$user->department->id}}">
             <input type="text" disabled class="form-control" id="departmentTitle" value="{{$user->department->title}}"
                    placeholder="user department">
-
         </div>
 
 
@@ -120,34 +119,43 @@
                 </div>
             </div>
 
-            <div class="col-auto me-3 mt-2 mb-2 {{$unsafeSwitch == false ? '' : 'bg-body-secondary rounded-2'}}">
-                <div class="mb-3 mt-2">
-                    <div class="form-check form-switch">
-                        <label for="unsafeSwitch" class="form-check-label">Unsafe Conditions</label>
-                        <input class="form-check-input" role="switch" type="checkbox" id="unsafeSwitch"
-                               wire:model.live="unsafeSwitch">
-                    </div>
-                </div>
+<livewire:items.safety-list :listItems="$unsafeConditions"
+                            :listItemsCheckbox="$unsafeCheckbox"
+                            title="Unsafe Conditions" />
+{{--            @livewire('items.safety-list',[--}}
+{{--            'listItems'=>'{{$unsafeConditions}}',--}}
+{{--            'title'=>'Unsafe Conditions'--}}
+{{--            ])--}}
 
-                <div class="mb-3" {{$unsafeSwitch == false ? 'hidden' : ''}}>
 
-                    <div class=" col-1 " style=" font-size:10px;max-width: 16px">
-                        AT RISK
-                    </div>
+{{--            <div class="col-auto me-3 mt-2 mb-2 {{$unsafeSwitch == false ? '' : 'bg-body-secondary rounded-2'}}">--}}
+{{--                <div class="mb-3 mt-2">--}}
+{{--                    <div class="form-check form-switch">--}}
+{{--                        <label for="unsafeSwitch" class="form-check-label">Unsafe Conditions</label>--}}
+{{--                        <input class="form-check-input" role="switch" type="checkbox" id="unsafeSwitch"--}}
+{{--                               wire:model.live="unsafeSwitch">--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
-                    @foreach($unsafeConditions as $unsafe)
-                        <div class="row gx-3 p-2  align-items-center">
-                            <div class="form-check col-1">
-                                <input class="form-check-input" type="checkbox"
-                                       wire:model.live="unsafeCheckbox.{{$unsafe->id}}">
-                            </div>
-                            <div class="col text-wrap">{{$unsafe->title}}</div>
-                        </div>
+{{--                <div class="mb-3" {{$unsafeSwitch == false ? 'hidden' : ''}}>--}}
 
-                    @endforeach
-                </div>
+{{--                    <div class=" col-1 " style=" font-size:10px;max-width: 16px">--}}
+{{--                        AT RISK--}}
+{{--                    </div>--}}
 
-            </div>
+{{--                    @foreach($unsafeConditions as $unsafe)--}}
+{{--                        <div class="row gx-3 p-2  align-items-center">--}}
+{{--                            <div class="form-check col-1">--}}
+{{--                                <input class="form-check-input" type="checkbox"--}}
+{{--                                       wire:model.live="unsafeCheckbox.{{$unsafe->id}}">--}}
+{{--                            </div>--}}
+{{--                            <div class="col text-wrap">{{$unsafe->title}}</div>--}}
+{{--                        </div>--}}
+
+{{--                    @endforeach--}}
+{{--                </div>--}}
+
+{{--            </div>--}}
             {{--            {{$qualitySwitch == false ? '' : 'bg-secondary-subtle rounded-2'}}--}}
             <div class="col-auto me-3 mt-2 mb-2 ">
                 <div class="mb-3 mt-2">

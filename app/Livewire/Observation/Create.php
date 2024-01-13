@@ -143,7 +143,7 @@ $this->safeBehaviours = array_keys(array_filter($this->safeCheckbox));
 $this->riskBehaviours = array_keys(array_filter($this->riskCheckbox));
 
 
-        //dd($this->unsafeCheckbox);
+        dd($this->unsafeCheckbox);
         //dd($this->riskBehaviours[0]);
         $this->validate();
 
