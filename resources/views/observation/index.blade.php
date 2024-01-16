@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+
     <div class="mb-3">
         <button type="button" class="btn btn-primary" onclick="window.location.href='observations/create';">Add observation</button>
     </div>
@@ -14,12 +15,14 @@
                 <th scope="col">Description</th>
                 <th scope="col">HSE Comments</th>
                 <th scope="col">Status</th>
+                <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
             @foreach($observations as $observation)
             <tr>
-                <th scope="row">{{$observation -> id}}</th>
+
+                <th scope="row">{{$observation -> id}} </th>
                 <td>{{date('Y-m-d',strtotime($observation->created_at))}}</td>
                 <td>{{date('Y-m-d',strtotime($observation -> updated_at))}}</td>
                 <td>{{$observation -> description}}</td>
@@ -27,6 +30,9 @@
                 @foreach($statuses as $status)
                     <td>{{ $status->id == $observation->status_id ? $status->title : '' }}</td>
                 @endforeach
+                    <td><a href = "{{route('observation.show',$observation -> id)}}">Show</a></td>
+
+
 
 
             </tr>

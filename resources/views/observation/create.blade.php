@@ -1,6 +1,9 @@
 @extends('layouts.main')
 @section('content')
     <div>
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='{{route('observation.index')}}';">Back</button>
+        </div>
         <form action="{{route('observation.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
@@ -269,6 +272,11 @@
         // }
     //     .split("\\").pop()
     </script>
+{{--    <script>--}}
+{{--        function closeAlert($alertName){--}}
+{{--            document.getElementById($alertName).hidden = true;--}}
+{{--        }--}}
+{{--    </script>--}}
 @endsection
 
 {{--document.getElementById("unsafeCheckbox").checked--}}

@@ -34,9 +34,17 @@ Route::get('/',  function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('observations',\App\Http\Controllers\Observation\IndexController::class)->name('observation.index');
-Route::get('observations/create',\App\Http\Controllers\Observation\CreateController::class)->name('observation.create');
-Route::post('observations',\App\Http\Controllers\Observation\StoreController::class)->name('observation.store');
+Route::get('observations', \App\Http\Controllers\Observation\IndexController::class)->name('observation.index');
+Route::get('observations/create', \App\Http\Controllers\Observation\CreateController::class);
+Route::post('observations', \App\Http\Controllers\Observation\StoreController::class)->name('observation.store');
+Route::get('observations/{observation}', \App\Http\Controllers\Observation\ShowController::class)->name('observation.show');
+Route::get('observations/{observation}/edit', \App\Http\Controllers\Observation\EditController::class)->name('observation.edit');
+Route::patch('observations/{observation}', \App\Http\Controllers\Observation\UpdateController::class)->name('observation.update');
+Route::delete('observations/{observation}', \App\Http\Controllers\Observation\DestroyController::class)->name('observation.destroy');
+
+//Route::get('observations',\App\Http\Controllers\Observation\IndexController::class)->name('observation.index');
+//Route::get('observations/create',\App\Http\Controllers\Observation\CreateController::class)->name('observation.create');
+//Route::post('observations',\App\Http\Controllers\Observation\StoreController::class)->name('observation.store');
 
 //LiveWire
 Route::get('observ/create',App\Livewire\Observation\Create::class)->name('observ.create1');

@@ -32,11 +32,11 @@ class StoreRequest extends FormRequest
             //'status_id' => 'integer',
             'department_id'=>'required',
             'user_id'=>'required',
-            'safeCheckbox'=>[],
-            'riskCheckbox'=>[],
-            'unsafeCheckbox'=>[],
-            'qualityCheckbox'=>[],
-            'environmentalCheckbox'=>[],
+            'safeCheckbox'=>'',
+            'riskCheckbox'=>'',
+            'unsafeCheckbox'=>'',
+            'qualityCheckbox'=>'',
+            'environmentalCheckbox'=>'',
             //'photos'=> ''
             'photos.*'=> 'image|max:2048'
             //'photos.*'=> [File::image()->max(2*1024)],

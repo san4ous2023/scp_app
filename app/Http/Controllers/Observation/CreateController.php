@@ -32,6 +32,7 @@ class CreateController extends Controller
             $unsafeCheckbox = array_fill_keys($unsafeCondition->pluck('id')->toArray(), false);
 
         }
+        //session()->flash('success', 'Observation 11created successfully');
         return view('observation.create', compact(
             'departments',
             'user',
