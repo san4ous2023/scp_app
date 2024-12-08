@@ -230,6 +230,11 @@
                 <label for="photosInput" class="form-label">You can submit photo along with observation</label>
                 <input type="file" class="form-control" id="photosInput" name="photos[]"  multiple >
                 @error('photos.*') <span class="text-danger">{{ $message }}</span> @enderror
+                <!-- Preview Container -->
+                <div id="previewContainer" class="row mt-3">
+
+                </div>
+
 {{--TODO implement multiple photo uploads with preview--}}
                 {{--            <button type="submit">Save photo</button>--}}
             </div>
@@ -271,6 +276,45 @@
         //     document.getElementById("test").innerHTML = files;
         // }
     //     .split("\\").pop()
+    </script>
+    <script>
+        document.getElementById('photosInput').addEventListener('change', function(event) {
+            const files = event.target.files;
+            const previewContainer = document.getElementById('previewContainer');
+
+            // Clear any existing previews
+            previewContainer.innerHTML = '';
+
+            // Loop through selected files and create preview elements
+            Array.from(files).forEach(file => {
+                if (file.type.startsWith('image/')) { // Ensure it's an image
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Create a Bootstrap-styled card for each image
+                        const col = document.createElement('div');
+                        col.className = 'col-md-3 mb-3'; // Adjust grid size as needed
+
+                        const card = document.createElement('div');
+                        card.className = 'card';
+
+                        const img = document.createElement('img');
+                        img.src = e.target.result; // Set the image source
+                        img.alt = 'Photo Preview';
+                        img.className = 'card-img-top img-fluid'; // Bootstrap styling for responsive images
+
+                        const cardBody = document.createElement('div');
+                        cardBody.className = 'card-body p-2 text-center';
+                        cardBody.innerText = file.name; // Display the file name
+
+                        card.appendChild(img);
+                        card.appendChild(cardBody);
+                        col.appendChild(card);
+                        previewContainer.appendChild(col);
+                    };
+                    reader.readAsDataURL(file); // Read the image file
+                }
+            });
+        });
     </script>
 {{--    <script>--}}
 {{--        function closeAlert($alertName){--}}

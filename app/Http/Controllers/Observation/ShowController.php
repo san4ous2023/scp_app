@@ -16,8 +16,9 @@ class ShowController extends Controller
         $environmentalObservations = $observation->environmentalObservations()->get();
         $safeBehaviours = $observation->safetyBehaviours()->where($column='state',$value='SAFE')->get();
         $riskBehaviours = $observation->safetyBehaviours()->where($column='state',$value='AT RISK')->get();
+        $photos = $observation -> photos()->get();
         //$riskBehaviours = $observation->safetyBehaviours()->withPivot('AT RISK')->get();
-        //dd($status);
+        //dd($photos[0]->url);
 
 // $post = Post::findOrFail($id);
         return view('observation.show',
@@ -28,6 +29,7 @@ class ShowController extends Controller
                 'safeBehaviours',
                 'riskBehaviours',
                 'status',
+                'photos'
             ));
     }
 }

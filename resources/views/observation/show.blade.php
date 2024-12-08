@@ -148,6 +148,19 @@
                 </div>
             @endif
 
+                @if(!empty($observation->photos))
+                    <div class="row">
+
+                        @foreach($observation->photos as $photo)
+                            <div class="col-md-4 mb-3">
+                                <div class="card" style="width: 18rem; border-radius: 10px;">
+                                    <img src="{{ asset('storage/' . $photo->url) }}" alt="Photo" style=" border-radius: 10px;" >
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
         </div>
 
 
