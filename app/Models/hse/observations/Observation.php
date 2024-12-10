@@ -26,7 +26,7 @@ class Observation extends Model
         return $this->belongsTo(User::class);
     }
     public function status(){
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Status::class,);
     }
     public function safetyBehaviours(){
         return $this->belongsToMany(SafetyBehaviours::class)->withPivot('state');

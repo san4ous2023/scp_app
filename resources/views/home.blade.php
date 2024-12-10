@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
 <div class="container">
@@ -15,6 +15,7 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                        <a href = "{{route('observation.index')}}" class="btn btn-sm btn-info">View Observations</a>
                 </div>
             </div>
         </div>

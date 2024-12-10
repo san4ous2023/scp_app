@@ -15,13 +15,13 @@ class IndexController extends Controller
     {
         $user = auth()->user();
         if( $user !== null){
-            $statuses = Status::all();
+            //$statuses = Status::all();
             $data = $request ->validated();
             $filter = app()->make(ObservationFilter::class,['queryParams'=>array_filter($data)]);
             //$observations = Observation::where('user_id',$user->id)->paginate(15);
             $observations = Observation::filter($filter)->paginate(15);
                //session()->flash('success', 'Observation 121created successfully');
-        return view('admin.observation.index', compact('observations', 'statuses'));
+        return view('admin.observation.index', compact('observations'));
         } else echo('No user found');
 //        try {
 //            $user = auth()->user();

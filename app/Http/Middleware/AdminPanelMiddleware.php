@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class FirstEnter
+class AdminPanelMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,12 +15,10 @@ class FirstEnter
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->user() !== null){
-
-            return redirect()->route('observation.index');
+        //dd(auth()->user()->role->title);
+        if (auth()->user()->role->title !== 'admin'){
+            return redirect()->route('home');
         }
-        else return redirect()->route('home');
-
-        //return $next($request);
+        return $next($request);
     }
 }

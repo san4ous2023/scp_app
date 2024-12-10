@@ -2,7 +2,9 @@
 @section('content')
     <div>
         <div class="mb-3">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='{{route('observation.index')}}';">Back</button>
+            <button type="button" class="btn btn-primary"
+                    onclick="window.location.href='{{route('observation.index')}}';">Back
+            </button>
         </div>
         <form action="{{route('observation.store')}}" method="post" enctype="multipart/form-data">
             @csrf
@@ -228,14 +230,14 @@
             <div class="mb-3">
                 <span id="test"></span>
                 <label for="photosInput" class="form-label">You can submit photo along with observation</label>
-                <input type="file" class="form-control" id="photosInput" name="photos[]"  multiple >
+                <input type="file" class="form-control" id="photosInput" name="photos[]" multiple>
                 @error('photos.*') <span class="text-danger">{{ $message }}</span> @enderror
                 <!-- Preview Container -->
                 <div id="previewContainer" class="row mt-3">
 
                 </div>
 
-{{--TODO implement multiple photo uploads with preview--}}
+                {{--TODO implement multiple photo uploads with preview--}}
                 {{--            <button type="submit">Save photo</button>--}}
             </div>
 
@@ -275,10 +277,10 @@
         //     }
         //     document.getElementById("test").innerHTML = files;
         // }
-    //     .split("\\").pop()
+        //     .split("\\").pop()
     </script>
     <script>
-        document.getElementById('photosInput').addEventListener('change', function(event) {
+        document.getElementById('photosInput').addEventListener('change', function (event) {
             const files = event.target.files;
             const previewContainer = document.getElementById('previewContainer');
 
@@ -289,7 +291,7 @@
             Array.from(files).forEach(file => {
                 if (file.type.startsWith('image/')) { // Ensure it's an image
                     const reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = function (e) {
                         // Create a Bootstrap-styled card for each image
                         const col = document.createElement('div');
                         col.className = 'col-md-3 mb-3'; // Adjust grid size as needed
@@ -316,11 +318,11 @@
             });
         });
     </script>
-{{--    <script>--}}
-{{--        function closeAlert($alertName){--}}
-{{--            document.getElementById($alertName).hidden = true;--}}
-{{--        }--}}
-{{--    </script>--}}
+    {{--    <script>--}}
+    {{--        function closeAlert($alertName){--}}
+    {{--            document.getElementById($alertName).hidden = true;--}}
+    {{--        }--}}
+    {{--    </script>--}}
 @endsection
 
 {{--document.getElementById("unsafeCheckbox").checked--}}

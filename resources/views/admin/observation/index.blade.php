@@ -52,6 +52,7 @@
                 <th scope="col">Updated</th>
                 <th scope="col">Description</th>
                 <th scope="col">HSE Comments</th>
+                <th scope="col">Department</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
             </tr>
@@ -60,14 +61,16 @@
             @forelse($observations as $observation)
             <tr>
 
-                <th scope="row">{{$observation -> id}} </th>
+                <td >{{$observation -> id}} </td>
                 <td>{{date('Y-m-d',strtotime($observation -> created_at))}}</td>
                 <td>{{date('Y-m-d',strtotime($observation -> updated_at))}}</td>
                 <td>{{$observation -> description}}</td>
                 <td>{{$observation -> comments}}</td>
-                @foreach($statuses as $status)
-                    <td>{{ $status->id == $observation->status_id ? $status->title : '' }}</td>
-                @endforeach
+                <td>{{$observation -> department-> title ?? 'None'}}</td>
+                <td>{{ $observation->status->title ?? 'Unknown'}}</td>
+{{--                @foreach($statuses as $status)--}}
+{{--                    <td>{{ $status->id == $observation->status_id ? $status->title : '' }}</td>--}}
+{{--                @endforeach--}}
                     <td><a href = "{{route('observation.show',$observation -> id)}}" class="btn btn-sm btn-info">View</a>
                         <a href="{{ route('observation.edit', $observation) }}" class="btn btn-sm btn-warning">Edit</a>
                         <form action="{{ route('observation.destroy', $observation) }}" method="POST" style="display:inline;">
