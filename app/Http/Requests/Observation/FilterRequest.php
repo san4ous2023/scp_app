@@ -22,15 +22,20 @@ class FilterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'site' => '',
-            'location' => '',
-            'further' => '',
-            'corrective' => '',
-            'comments' => '',
-            'description' => 'string',
+            //'site' => '',
+            //'location' => '',
+            //'further' => '',
+            //'corrective' => '',
+            //'comments' => '',
+            //'description' => 'string',
             'status_id' => 'integer',
             'department_id'=>'integer',
-            'user_id'=>'integer'
+            'user_id'=>'integer',
+            'created_at'=>'string',
+            'start_date'=>'string',
+            'end_date'=>'string',
+
+
         ];
     }
 }

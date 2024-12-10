@@ -3,6 +3,7 @@
 namespace App\Models\hse\observations;
 
 use App\Models\Department;
+use App\Models\hse\observations\Traits\Filterable;
 use App\Models\Photos;
 use App\Models\Status;
 use App\Models\User;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Observation extends Model
 {
     use HasFactory;
+    use Filterable;
     protected $guarded = [];
 
     public function department(){
