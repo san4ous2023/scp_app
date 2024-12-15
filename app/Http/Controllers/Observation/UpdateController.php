@@ -2,15 +2,28 @@
 
 namespace App\Http\Controllers\Observation;
 
-use App\Http\Controllers\Controller;
-use App\Models\hse\observations\Observation;
-use Illuminate\Http\Request;
 
-class UpdateController extends Controller
+use App\Http\Requests\Observation\UpdateRequest;
+use App\Models\hse\observations\Observation;
+
+use Illuminate\Support\Facades\DB;
+
+class UpdateController extends BaseController
 {
-    public function __invoke(Observation $observation)
+    public function __invoke(UpdateRequest $request, Observation $observation)
     {
-// $post = Post::findOrFail($id);
-        // return view('observation.show', compact('observation'));
+        // DB::transaction(function () use ($request, $observation) {
+        $data = $request->validated();
+        try {
+            $this->service->update($data, $observation);
+            return redirect()->route('observation.show', $observation);
+        } catch (\Exception $e) {
+            \Log::error('Failed to update observation', [
+                'exception' => $e->getMessage(),
+                'trace' => $e->getTrace()
+            ]);
+        }
+            return redirect()->back()->with('error', 'Update failed: ' . $e->getMessage());
+        }
+
     }
-}

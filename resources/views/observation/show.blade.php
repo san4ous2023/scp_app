@@ -6,32 +6,49 @@
                     onclick="window.location.href='{{route('observation.index')}}';">Back
             </button>
         </div>
+        <div class="card mb-3">
+            <div class="card-header">
+                <div ><strong>Observation #{{$observation -> id}}</strong></div>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3 ">
+                    <div class="col-sm-auto"><strong>Site / Location:</strong></div>
+                    <div class="col-sm-auto">{{$observation -> site}} / {{$observation -> location}}</div>
+                </div>
 
-        <div class="mb-3"><strong>Observation #{{$observation -> id}} info:</strong></div>
+                <div class="row mb-3 ">
+                    <div class="col-sm-auto"><strong>User:</strong></div>
+                    <div class="col-sm-auto">{{$user}}</div>
+                </div>
+                <div class="row mb-3 ">
+                    <div class="col-sm-auto"><strong>Department:</strong></div>
+                    <div class="col-sm-auto">{{$department}}</div>
+                </div>
+                <div class="row mb-3 ">
+                    <div class="col-sm-auto"><strong>Description:</strong></div>
+                    <div class="col-sm-auto">{{$observation -> description}}</div>
+                </div>
 
-        <div class="row mb-3 ">
-            <div class="col-sm-auto"><strong>Site / Location:</strong></div>
-            <div class="col-sm-auto">{{$observation -> site}} / {{$observation -> location}}</div>
+                <div class="row mb-3 ">
+                    <div class="col-sm-auto"><strong>Status:</strong></div>
+                    <div class="col-sm-auto">{{$status -> first()->title}}</div>
+                </div>
+
+                <div class="row mb-3 ">
+                    <div class="col-sm-auto"><strong>Created:</strong></div>
+                    <div class="col-sm-auto">{{date('d M Y H:i',strtotime($observation->created_at))}}</div>
+                </div>
+                <div class="row mb-3 ">
+                    <div class="col-sm-auto"><strong>Updated:</strong></div>
+                    <div class="col-sm-auto">{{date('d M Y H:i',strtotime($observation -> updated_at))}}</div>
+                </div>
+            </div>
+
+
+
         </div>
 
-        <div class="row mb-3 ">
-            <div class="col-sm-auto"><strong>Description:</strong></div>
-            <div class="col-sm-auto">{{$observation -> description}}</div>
-        </div>
 
-        <div class="row mb-3 ">
-            <div class="col-sm-auto"><strong>Status:</strong></div>
-            <div class="col-sm-auto">{{$status -> first()->title}}</div>
-        </div>
-
-        <div class="row mb-3 ">
-            <div class="col-sm-auto"><strong>Created:</strong></div>
-            <div class="col-sm-auto">{{date('d M Y H:i',strtotime($observation->created_at))}}</div>
-        </div>
-        <div class="row mb-3 ">
-            <div class="col-sm-auto"><strong>Updated:</strong></div>
-            <div class="col-sm-auto">{{date('d M Y H:i',strtotime($observation -> updated_at))}}</div>
-        </div>
 
 
         <div class="row mb-3 ">

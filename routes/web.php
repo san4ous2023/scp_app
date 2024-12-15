@@ -48,6 +48,10 @@ Route::group(['prefix' => 'observations'], function() {
     Route::delete('/{observation}', \App\Http\Controllers\Observation\DestroyController::class)->name('observation.destroy');
 });
 
+Route::delete('photos/{photo}', \App\Http\Controllers\Photo\DestroyController::class)->name('photos.destroy');
+//Route::delete('photos/bulk-destroy', \App\Http\Controllers\Photo\BulkDestroyController::class)->name('photos.bulkDestroy'); // not use for now
+
+
 //Route::get('observ/create',App\Livewire\Observation\Create::class)->name('observ.create1');
 //Route::post('observ/create',App\Livewire\Observation\Create::class)->name('observ.create1');
 

@@ -3,9 +3,10 @@
 
     <div class="mb-3">
         <button type="button" class="btn btn-primary" onclick="window.location.href='observations/create';">Add
-            observation
+            observation bla
         </button>
     </div>
+    @include('includes.elements.filter')
     <div class="mb-3 table-responsive">
 
         <table class="table table-striped ">

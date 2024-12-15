@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Status;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,5 +25,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Paginator::useBootstrapFive();
+
+        View::composer('includes.elements.filter', function ($view) {
+            $view->with('statuses', Status::all()); // Example: Fetch statuses from the database
+        });
     }
 }

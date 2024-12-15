@@ -15,7 +15,7 @@ class IndexController extends Controller
     {
         $user = auth()->user();
         if( $user !== null){
-            //$statuses = Status::all();
+           // $statuses = Status::all();
             $data = $request ->validated();
             $filter = app()->make(ObservationFilter::class,['queryParams'=>array_filter($data)]);
             //$observations = Observation::where('user_id',$user->id)->paginate(15);
