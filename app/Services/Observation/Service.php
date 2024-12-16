@@ -165,19 +165,88 @@ class Service
         }
     }
 
+    public function deleteObservation(Observation $observation){
 
-    /**
-     * Delete specific photos linked to an observation.
-     */
-    public function deletePhotos(array $photoIds): void
-    {
-        DB::transaction(function () use ($photoIds) {
-            $photos = Photos::whereIn('id', $photoIds)->get();
+        DB::beginTransaction();
+        try {
+            // Fetch associated photos
+            $photos = $observation->photos;
+
+            // Delete each photo from storage
             foreach ($photos as $photo) {
-                Storage::delete($photo->url); // Delete from storage
-                $photo->delete(); // Delete from database
+                if (Storage::disk('public')->exists($photo->url)) {
+                    Storage::disk('public')->delete($photo->url);
+                }
             }
-        });
+
+            // Delete photo records from the database
+            $observation->photos()->delete();
+
+            // Delete the observation itself
+            $observation->delete();
+
+            DB::commit(); // Commit the transaction if all goes well
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack(); // Rollback the transaction on failure
+            \Log::error('Error deleting observation: ' . $e->getMessage());
+            throw new \Exception('Failed to delete observation.');
+        }
     }
 
+
 }
+
+//
+//    /**
+//     * Delete specific photos linked to an observation.
+//     */
+//
+//    public function deletePhotos(array $photoIds): void
+//    {
+//        // Log the file path
+//        DB::transaction(function () use ($photoIds) {
+//        try {
+//            foreach ($photoIds as $photo)
+//            // Delete the file from storage
+//            if (Storage::disk('public')->exists($photo->url)) {
+//                Storage::disk('public')->delete($photo->url);
+//                \Log::info('File deleted successfully: ' . $photo->url);
+//            } else {
+//                \Log::warning('File not found: ' . $photo->url);
+//            }
+//            // Delete the database record
+//            $photo->delete();
+//
+//            return redirect()
+//                ->back()
+//                ->with('success', 'Photo deleted successfully.');
+//
+//        } catch (\Exception $e) {
+//
+//            \Log::error('Error deleting photo: ' . $e->getMessage());
+//            return redirect()
+//                ->back()
+//                ->with('error', 'Failed to delete the photo. Please try again.');
+//
+//        }
+//
+//
+//
+//            $photos = Photos::whereIn('id', $photoIds)->get();
+//            foreach ($photos as $photo) {
+//                Storage::delete($photo->url); // Delete from storage
+//                $photo->delete(); // Delete from database
+//            }
+//        });
+//    }
+
+//}
+//
+//
+//public function __invoke(Photos $photo)
+//{
+//    // Log the file path
+//    \Log::info('Attempting to delete file: ' . $photo->url);
+//
+//

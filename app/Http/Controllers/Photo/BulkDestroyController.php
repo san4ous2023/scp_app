@@ -11,7 +11,7 @@ class BulkDestroyController extends Controller
 {
     public function __invoke(Request $request)
     {
-        dd('hi');
+        //dd('hi');
         $photoIds = $request->input('photo_ids', []); // Retrieve selected photo IDs
 
         if (empty($photoIds)) {

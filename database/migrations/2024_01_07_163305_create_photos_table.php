@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('intervention_id')->nullable();
             $table->string('job_id')->nullable();
             $table->timestamps();
+
+            $table->foreignId('observation_id')
+                ->constrained()
+                ->onDelete('cascade');
         });
     }
 
