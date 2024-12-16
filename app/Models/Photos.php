@@ -20,16 +20,16 @@ class Photos extends Model
     {
         parent::boot();
 
-        static::deleting(function ($observation) {
-            foreach ($observation->photos as $photo) {
-                if (Storage::disk('public')->exists($photo->url)) {
-                    Storage::disk('public')->delete($photo->url);
-                }
-            }
-            // Optionally delete related records
-            $observation->photos()->delete(); // Remove records from the database
-            // Make sure that this deletion does not remove the observation itself
-            // unless explicitly needed (e.g., if you want photos to be deleted with observation).
+        static::deleting(function ($photos) {
+//            foreach ($observation->photos as $photo) {
+//                if (Storage::disk('public')->exists($photo->url)) {
+//                    Storage::disk('public')->delete($photo->url);
+//                }
+//            }
+//            // Optionally delete related records
+//            $observation->photos()->delete(); // Remove records from the database
+//            // Make sure that this deletion does not remove the observation itself
+//            // unless explicitly needed (e.g., if you want photos to be deleted with observation).
         });
     }
 }
