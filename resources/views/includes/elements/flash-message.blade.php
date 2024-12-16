@@ -46,4 +46,12 @@
     function closeAlert($alertName){
         document.getElementById($alertName).hidden = true;
     }
+    //auto remove alert notification
+    setTimeout(function () {
+        let alert = document.querySelector('.alert');
+        if (alert) {
+            alert.classList.add('fade');
+            setTimeout(() => alert.remove(), 500); // Remove alert after fade-out
+        }
+    }, 3000); // 3 seconds before fading out
 </script>

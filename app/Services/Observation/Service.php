@@ -26,9 +26,6 @@ class Service
                 'corrective' => $data['corrective'] ?? 'NA',
             ]);
 
-
-//            // Attach Relationships
-//            $this->syncRelations($observation, $data);
             // Attach Relationships
             $this->attachCheckboxes($observation, $data);
 
@@ -42,78 +39,6 @@ class Service
             DB::rollBack();
             throw new \Exception("Failed to create observation: " . $e->getMessage());
         }
-
-//        try {
-//            $observation = Observation::create([
-//                'site' => $data['site'] ?? 'SCP',
-//                'location' => $data['location'] ?? 'vessel',
-//                'department_id' => $data['department_id'],
-//                'user_id' => $data['user_id'],
-//                'description' => $data['description'],
-//                'further' => $data['further'] ?? '',
-//                'corrective' => $data['corrective'] ?? '',
-//            ]);
-//
-//            if (isset($data['safeCheckbox'])) {
-//                foreach ($data['safeCheckbox'] as $key => $value) {
-//                    $observation->safetyBehaviours()->attach($key, ['state' => 'SAFE']);
-//                }
-//            }
-//            if (isset($data['riskCheckbox'])) {
-//                foreach ($data['riskCheckbox'] as $key => $value) {
-//                    $observation->safetyBehaviours()->attach($key, ['state' => 'AT RISK']);
-//                }
-//            }
-//
-//            if (isset($data['unsafeCheckbox'])) {
-//                foreach ($data['unsafeCheckbox'] as $key => $value) {
-//                    $observation->unsafeConditions()->attach($key);
-//                }
-//            }
-//
-//            if (isset($data['qualityCheckbox'])) {
-//                foreach ($data['qualityCheckbox'] as $key => $value) {
-//                    $observation->qualityObservations()->attach($key);
-//                }
-//            }
-//
-//            if (isset($data['environmentalCheckbox'])) {
-//                foreach ($data['environmentalCheckbox'] as $key => $value) {
-//                    $observation->environmentalObservations()->attach($key);
-//                }
-//            }
-//
-////            if (!empty($data['photos'])) {
-////                $photos = $data['photos']->file('photos');
-////                foreach ($photos as $key => $value) {
-////                    $name = $data['user_id'] . '.' . date('YmdHis', time()) . '_' . $key + 1 . '.' . $value->getClientOriginalExtension();
-////                    //Storage::disk('public')->putFileAs('uploads', $photo,);
-////                    $path = $value->storeAs('images', $name, 'public');
-////                    $photo = Photos::create([
-////                        'url' => $path,
-////                    ]);
-////                    $observation->photos()->save($photo);
-////                }
-////            }
-//
-//            if ($request->hasFile('photos')) {
-//                $photos = $request->file('photos');
-//                foreach ($photos as $key => $value) {
-//                    $name = $data['user_id'] . '.' . date('YmdHis', time()) . '_' . $key + 1 . '.' . $value->getClientOriginalExtension();
-//                    //Storage::disk('public')->putFileAs('uploads', $photo,);
-//                    $path = $value->storeAs('images', $name, 'public');
-//                    $photo = Photos::create([
-//                        'url' => $path,
-//                    ]);
-//                    $observation->photos()->save($photo);
-//                }
-//            }
-//
-//
-//        } catch (\Exception $message) {
-//            return back()->with('error', $message->getMessage());
-//        }
-
     }
 
     public function update(array $data, Observation $observation)
@@ -134,54 +59,12 @@ class Service
                 // Sync Relationships
                 $this->syncBehaviours($observation, $data);
 
-// Sync Relationships
-        //        $this->syncRelations($observation, $data);
-//        $observation->safetyBehaviours()->detach();
-//
-//        if (isset($data['safeCheckbox'])) {
-//            foreach ($data['safeCheckbox'] as $key => $value) {
-//                $observation->safetyBehaviours()->attach($key, ['state' => 'SAFE']);
-//            }
-//        }
-//        if (isset($data['riskCheckbox'])) {
-//            foreach ($data['riskCheckbox'] as $key => $value) {
-//                $observation->safetyBehaviours()->attach($key, ['state' => 'AT RISK']);
-//            }
-//        }
-//
-//        if (isset($data['unsafeCheckbox'])) {
-//            $observation->unsafeConditions()->detach();
-//            foreach ($data['unsafeCheckbox'] as $key => $value) {
-//                $observation->unsafeConditions()->attach($key);
-//            }
-//        }
-//
-//        if (isset($data['qualityCheckbox'])) {
-//            $observation->qualityObservations()->detach();
-//            foreach ($data['qualityCheckbox'] as $key => $value) {
-//                $observation->qualityObservations()->attach($key);
-//            }
-//        }
-//
-//        if (isset($data['environmentalCheckbox'])) {
-//            $observation->environmentalObservations()->detach();
-//            foreach ($data['environmentalCheckbox'] as $key => $value) {
-//                $observation->environmentalObservations()->attach($key);
-//            }
-//        }
-                       // Safety Behaviours
-//            $this->syncBehaviours($observation, $data);
-//
-            // Sync Relationships
-            $this->syncRelation($observation, 'unsafeConditions', $data['unsafeCheckbox'] ?? []);
-            $this->syncRelation($observation, 'qualityObservations', $data['qualityCheckbox'] ?? []);
-            $this->syncRelation($observation, 'environmentalObservations', $data['environmentalCheckbox'] ?? []);
 
+                // Sync Relationships
+                $this->syncRelation($observation, 'unsafeConditions', $data['unsafeCheckbox'] ?? []);
+                $this->syncRelation($observation, 'qualityObservations', $data['qualityCheckbox'] ?? []);
+                $this->syncRelation($observation, 'environmentalObservations', $data['environmentalCheckbox'] ?? []);
 
-                // Other Relationships
-                //$this->syncRelation($observation, 'unsafeConditions', $data['unsafeCheckbox'] ?? []);
-                // $this->syncRelation($observation, 'qualityObservations', $data['qualityCheckbox'] ?? []);
-                // $this->syncRelation($observation, 'environmentalObservations', $data['environmentalCheckbox'] ?? []);
 
                 // Handle Photos
                 if (!empty($data['photos']) && is_array($data['photos'])) {
@@ -195,14 +78,6 @@ class Service
             throw $e;
         }
 
-    }
-    private function syncRelations(Observation $observation, array $data): void
-    {
-        $this->syncRelation($observation, 'safetyBehaviours', $data['safeCheckbox'] ?? [], 'state', 'SAFE');
-        $this->syncRelation($observation, 'safetyBehaviours', $data['riskCheckbox'] ?? [], 'state', 'AT RISK');
-        $this->syncRelation($observation, 'unsafeConditions', $data['unsafeCheckbox'] ?? []);
-        $this->syncRelation($observation, 'qualityObservations', $data['qualityCheckbox'] ?? []);
-        $this->syncRelation($observation, 'environmentalObservations', $data['environmentalCheckbox'] ?? []);
     }
 
     private function syncRelation(Observation $observation, string $relation, array $values, string $extraField = null, string $extraValue = null)
@@ -232,12 +107,6 @@ class Service
         }
         $observation->safetyBehaviours()->attach($behaviours);
     }
-
-//    private function syncRelation($observation, $relation, $ids)
-//    {
-//        $observation->$relation()->sync($ids);
-//    }
-
 
     private function attachCheckboxes(Observation $observation, array $data)
     {
@@ -275,22 +144,6 @@ class Service
             }
         }
     }
-//    private function savePhotos(Observation $observation, array $photos, int $userId)
-//    {
-//        $photoRecords = [];
-//        foreach ($photos as $key => $photo) {
-//            $filename = sprintf('%d.%s_%d.%s', $userId, date('YmdHis'), $key + 1, $photo->getClientOriginalExtension());
-//            $path = $photo->storeAs('images', $filename, 'public');
-//
-//            $photoRecords[] = ['url' => $path];
-//        }
-//
-//        // Bulk insert photos and attach them
-//        $photoModels = Photos::insert($photoRecords);
-//        $observation->photos()->saveMany($photoModels);
-//        // Bulk save photos
-//        //$observation->photos()->saveMany($photoRecords);
-//    }
 
     private function savePhotos(Observation $observation, array $photos, int $userId)
     {
@@ -326,14 +179,5 @@ class Service
             }
         });
     }
-//    private function savePhotos(Observation $observation, array $photos, int $userId)
-//    {
-//        foreach ($photos as $key => $photo) {
-//            $filename = sprintf('%d.%s_%d.%s', $userId, date('YmdHis'), $key + 1, $photo->getClientOriginalExtension());
-//            $path = $photo->storeAs('images', $filename, 'public');
-//
-//            $photoRecord = Photos::create(['url' => $path]);
-//            $observation->photos()->save($photoRecord);
-//        }
-//    }
+
 }

@@ -16,7 +16,7 @@ class UpdateController extends BaseController
         $data = $request->validated();
         try {
             $this->service->update($data, $observation);
-            return redirect()->route('observation.show', $observation);
+            return redirect()->route('observation.show', $observation)->with('success', 'Observation Update successfully.');;
         } catch (\Exception $e) {
             \Log::error('Failed to update observation', [
                 'exception' => $e->getMessage(),

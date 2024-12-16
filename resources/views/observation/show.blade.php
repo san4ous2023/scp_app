@@ -2,9 +2,19 @@
 @section('content')
     <div class="container mt-3">
         <div class="mb-3">
-            <button type="button" class="btn btn-primary"
-                    onclick="window.location.href='{{route('observation.index')}}';">Back
-            </button>
+            <a href="{{url()->previous() ?? route('observation.index') }}" class="btn btn-primary">Back</a>
+{{--            <button type="button" class="btn btn-primary"--}}
+{{--                    onclick="window.location.href='{{route('observation.index')}}';">Back--}}
+{{--            </button>--}}
+            @can('view', auth()->user())
+            <a href="{{ route('observation.edit', $observation) }}" class="btn btn btn-warning">Edit</a>
+
+                <form action="{{ route('observation.destroy', $observation) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn btn-danger">Delete</button>
+                </form>
+            @endcan
         </div>
         <div class="card mb-3">
             <div class="card-header">
@@ -59,20 +69,59 @@
                         <div class="card-header">
                             Safety Behaviours
                         </div>
-                        <ul class="list-group list-group-flush">
-                            @if($safeBehaviours)
-                                @foreach($safeBehaviours as $safeBehaviour)
-                                    <li class="list-group-item">SAFE: {{$safeBehaviour->title}}</li>
-                                @endforeach
-                            @endif
-                            @if($riskBehaviours)
-                                @foreach($riskBehaviours as $riskBehaviour)
-                                    <li class="list-group-item">AT RISK: {{$riskBehaviour->title}}</li>
-                                @endforeach
-                            @endif
-                        </ul>
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- SAFE Behaviours Column -->
+                                <div class="col-md-6">
+                                    <p><strong>SAFE</strong></p>
+                                    <ul class="list-group list-group-flush">
+                                        @if($safeBehaviours && count($safeBehaviours))
+                                            @foreach($safeBehaviours as $safeBehaviour)
+                                                <li class="list-group-item">{{$safeBehaviour->title}}</li>
+                                            @endforeach
+                                        @else
+{{--                                            <li class="list-group-item text-muted">No SAFE Behaviours</li>--}}
+                                        @endif
+                                    </ul>
+                                </div>
+                                <!-- AT RISK Behaviours Column -->
+                                <div class="col-md-6">
+                                    <p><strong>AT RISK</strong></p>
+                                    <ul class="list-group list-group-flush">
+                                        @if($riskBehaviours && count($riskBehaviours))
+                                            @foreach($riskBehaviours as $riskBehaviour)
+                                                <li class="list-group-item">{{$riskBehaviour->title}}</li>
+                                            @endforeach
+                                        @else
+{{--                                            <li class="list-group-item text-muted">No AT RISK Behaviours</li>--}}
+                                        @endif
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+{{--                <div class="col mb-3">--}}
+{{--                    <div class="card">--}}
+{{--                        <div class="card-header">--}}
+{{--                            Safety Behaviours--}}
+{{--                        </div>--}}
+{{--                        <ul class="list-group list-group-flush">--}}
+{{--                            @if($safeBehaviours)--}}
+{{--                                @foreach($safeBehaviours as $safeBehaviour)--}}
+{{--                                    <li class="list-group-item">SAFE: {{$safeBehaviour->title}}</li>--}}
+{{--                                @endforeach--}}
+{{--                            @endif--}}
+{{--                            @if($riskBehaviours)--}}
+{{--                                @foreach($riskBehaviours as $riskBehaviour)--}}
+{{--                                    <li class="list-group-item">AT RISK: {{$riskBehaviour->title}}</li>--}}
+{{--                                @endforeach--}}
+{{--                            @endif--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
+
             @endif
 
 

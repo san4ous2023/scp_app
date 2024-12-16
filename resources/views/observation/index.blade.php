@@ -2,8 +2,8 @@
 @section('content')
 
     <div class="mb-3">
-        <button type="button" class="btn btn-primary" onclick="window.location.href='observations/create';">Add
-            observation bla
+        <button type="button" class="btn btn-primary" onclick="window.location.href='observations/create';">
+            Add observation
         </button>
     </div>
     @include('includes.elements.filter')
@@ -53,22 +53,7 @@
         <div class="mb-3">
             {{$observations->withQueryString()->links()}}
         </div>
-
-        {{--        <div>--}}
-        {{--        @livewire('observation.create')--}}
-        {{--        </div>--}}
-
-
-        {{--                    <h3>{{$observation -> observation_name}}</h3>--}}
-        {{--            <div>--}}
-        {{--                <a href = "">{{$observation -> id}}: {{$observation -> description}}</a>--}}
-        {{--            </div>--}}
-
-        {{--            {{route('observation.show',$observation -> id)}}--}}
     </div>
 
-    {{--    <div class="mb-3">--}}
-    {{--        {{$observations->withQueryString()->links()}}--}}
-    {{--    </div>--}}
 
 @endsection

@@ -13,16 +13,17 @@ class DestroyController extends Controller
 
     public function __invoke(Photos $photo)
     {
-       // echo($photo->url);
-        try {
-          //  dd(Storage::exists($photo->url), $photo->url, $photo);
-            // Delete the file from storage
-            if (Storage::exists($photo->url)) {
-                Storage::delete($photo->url);
+        // Log the file path
+        \Log::info('Attempting to delete file: ' . $photo->url);
 
-                // Delete the photo record from the database
-               // $photo->delete();
-            }
+        try {
+            // Delete the file from storage
+            if (Storage::disk('public')->exists($photo->url)) {
+                Storage::disk('public')->delete($photo->url);
+                \Log::info('File deleted successfully: ' . $photo->url);
+            } else {
+        \Log::warning('File not found: ' . $photo->url);
+    }
             // Delete the database record
             $photo->delete();
 
@@ -30,31 +31,14 @@ class DestroyController extends Controller
                 ->back()
                 ->with('success', 'Photo deleted successfully.');
 
-       // else response()->json(['not success' => true], 200);
-
-            //echo('url no exist');
         } catch (\Exception $e) {
-           // echo('error');
-            //var_dump($e->getMessage());
-            // Log the error for debugging
+
             \Log::error('Error deleting photo: ' . $e->getMessage());
             return redirect()
                 ->back()
                 ->with('error', 'Failed to delete the photo. Please try again.');
-            //return response()->json(['error' => 'Failed to delete photo'], 500);
+
         }
 
-       // echo('done');
-//// Delete the file from storage
-//        if (Storage::exists($photo->url)) {
-//            //dd($photo->url);
-//            Storage::delete($photo->url);
-//        }
-//
-//        // Remove the photo record from the database
-//        $photo->delete();
-//        //dd('deleted');
-//        // Redirect back with success message
-//        return redirect()->route('observation.index')->with('success', 'Photo deleted successfully.');
     }
 }
