@@ -21,7 +21,6 @@
     {{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous">--}}
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head> <!--end::Head--> <!--begin::Body-->
-
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
 <div class="app-wrapper"> <!--begin::Header-->
     <nav class="app-header navbar navbar-expand bg-body"> <!--begin::Container-->
@@ -35,11 +34,11 @@
                 <li class="nav-item d-none d-md-block"><a class="nav-link" href="{{route('observation.index')}}">Observation</a>
                 </li>
                 {{--                    <li class="nav-item"><a class="nav-link" href = "{{route('job.index')}}">Jobs</a></li>--}}
-                @can('view', auth()->user())
-                    <li class="nav-item d-none d-md-block"><a class="nav-link"
-                                                              href="{{route('admin.observation.index')}}">Admin
-                            Panel</a></li>
-                @endcan
+{{--                @can('view', auth()->user())--}}
+{{--                    <li class="nav-item d-none d-md-block"><a class="nav-link"--}}
+{{--                                                              href="{{route('admin.observation.index')}}">Admin--}}
+{{--                            Panel</a></li>--}}
+{{--                @endcan--}}
 
             </ul> <!--end::Start Navbar Links--> <!--begin::End Navbar Links-->
             <ul class="navbar-nav ms-auto">

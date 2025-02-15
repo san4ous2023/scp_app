@@ -40,12 +40,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix' => 'observations'], function() {
     Route::get('/', \App\Http\Controllers\Observation\IndexController::class)->name('observation.index');
+    //Route::get('/export',function () { return "Route is working!";} )->name('observations.export');
+    Route::get('/export', \App\Http\Controllers\Observation\ExportController::class)->name('observations.export');
     Route::get('/create', \App\Http\Controllers\Observation\CreateController::class);
     Route::post('', \App\Http\Controllers\Observation\StoreController::class)->name('observation.store');
     Route::get('/{observation}', \App\Http\Controllers\Observation\ShowController::class)->name('observation.show');
     Route::get('/{observation}/edit', \App\Http\Controllers\Observation\EditController::class)->name('observation.edit');
     Route::patch('/{observation}', \App\Http\Controllers\Observation\UpdateController::class)->name('observation.update');
     Route::delete('/{observation}', \App\Http\Controllers\Observation\DestroyController::class)->name('observation.destroy');
+    //Route::get('/export', \App\Http\Controllers\Observation\ExportController::class)->name('observations.export');
+
+
 });
 
 Route::delete('photos/{photo}', \App\Http\Controllers\Photo\DestroyController::class)->name('photos.destroy');

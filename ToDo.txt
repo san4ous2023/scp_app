@@ -1,0 +1,6 @@
+TODO List
+
+1. Filter. Add other filter parameters (Discuss with HSE)
+2. Filter. Search by user name
+3. Admin Sidebar. Remain the needfull.
+4. DO a view with mobile first visability.

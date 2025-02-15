@@ -8,14 +8,14 @@
     <form id="filterForm" action="{{ route('observation.index') }}" method="GET">
         <div class="row g-2">
             @can('view', auth()->user())
-                <div class="col">
+                <div class="col-sm-3">
                     <label for="userId" class="form-label">User ID</label>
-                    <input type="text" class="form-control" id="userId" name="user_id" placeholder="Enter User ID">
+                    <input type="text" class="form-control " id="userId" name="user_id" placeholder="Enter User ID">
                 </div>
             @endcan
-            <div class="col">
+            <div class="col-sm-3">
                 <label for="status" class="form-label">Status</label>
-                <select name="status_id" class="form-select">
+                <select name="status_id" class="form-select ">
                     <option value="">Select Status</option>
                     @foreach($statuses as $status)
                         <option value="{{ $status->id }}" {{ request('status_id') == $status->id ? 'selected' : '' }}>
@@ -24,13 +24,13 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col">
+            <div class="col-sm-3">
                 <label for="startDate" class="form-label">Start Date</label>
                 <input type="date" class="form-control" id="startDate" name="start_date"
                        value="{{ old('start_date', request('start_date')) }}">
             </div>
-            <div class="col">
-                <label for="endDate" class="form-label">End Date</label>
+            <div class="col-sm-3">
+                <label for="endDate" class="form-label ">End Date</label>
                 <input type="date" class="form-control" id="endDate" name="end_date"
                        value="{{ old('end_date', request('end_date')) }}">
             </div>
